@@ -19,3 +19,4 @@ WEB Server:
 Changes:
     -> I am going to change the implementation of NEAT and WEB servers.
     -> I will use meinheld server for NEAT and WEB servers.
+    -> Web interface form will be in flask.
