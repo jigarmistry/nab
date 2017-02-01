@@ -1,0 +1,17 @@
+NEAT Server
+    -> Server will receive the GET request from neat clients.
+    -> Server will respond with the command (Which command to send ?)
+    -> Do we need to store this commands in db for later use ?
+
+    -> Server will receive the POST request from the neat clients.
+    -> Server will respond with the ack.
+
+WEB Server
+    -> We need to create the web interface form.
+    -> Form will send the data(company and command) to web server.
+    -> What will webserver will return to web interface ?
+    -> Do we need to get anything from db ?
+
+Changes:
+    -> I am going to change the implementation of NEAT and WEB servers.
+    -> I will use meinheld server for NEAT and WEB servers.
