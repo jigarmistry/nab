@@ -31,7 +31,7 @@ def send_neat_request():
     pr = requests.post(
         'http://localhost:8888/neat', data=json.dumps(post_data))
     print(pr.text)
-    threading.Timer(4, send_neat_request).start()
+    threading.Timer(3, send_neat_request).start()
 
 
 if __name__ == "__main__":
