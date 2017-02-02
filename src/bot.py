@@ -19,7 +19,7 @@ def send_neat_request():
     gr = requests.get('http://localhost:8888/neat', params=get_data)
     command = gr.text
     post_data = {"account": get_data, "return": "OKAY"}
-    if i % 3 == 0:
+    if i % 2 == 0:
         post_data["return"] = {
             "catapult": "abc",
             "carriage": "A2222S",
@@ -30,7 +30,6 @@ def send_neat_request():
     time.sleep(2)
     pr = requests.post(
         'http://localhost:8888/neat', data=json.dumps(post_data))
-    print(pr.text)
     threading.Timer(3, send_neat_request).start()
 
 

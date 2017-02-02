@@ -50,20 +50,23 @@
             </div>
             <div class="form-group">
                 <label for="command">Command</label>
-                <input type="text" class="form-control" id="command" value="ccc">
+                <input type="text" class="form-control" id="command" value="OKAY">
             </div>
         </form>
         <div class="loader" id="loader"></div><br><br>
         <div class="panel panel-default">
-            <div class="panel-heading">Results</div>
+            <div class="panel-heading">Result - <label id="count"></label></div>
             <div class="panel-body" id="result"></div>
         </div>
     </div>
     <script>
         $(function () {
-            $("#loader").hide();
+            var count = 0;
+            $("#count").html(count);
 
             function callAPI() {
+                count = count + 1;
+                $("#count").html(count);
                 let city = $("#city").val();
                 let command = $("#command").val();
                 let data = {
