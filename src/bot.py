@@ -1,4 +1,5 @@
 import json
+import time
 import requests
 import datetime
 import threading
@@ -26,6 +27,7 @@ def send_neat_request():
             "id": i,
             "command": command
         }
+    time.sleep(2)
     pr = requests.post(
         'http://localhost:8888/neat', data=json.dumps(post_data))
     print(pr.text)
