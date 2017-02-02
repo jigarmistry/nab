@@ -1,5 +1,6 @@
 // Place your settings in this file to overwrite default and user settings.
 {
     "python.pythonPath": "python3.5",
-    "python.linting.pylintEnabled": false
+    "python.linting.pylintEnabled": false,
+    "python.formatting.provider": "yapf"
 }

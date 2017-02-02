@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://warfares.github.io/pretty-json/css/pretty-json.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min.js"></script>
+    <script src="http://warfares.github.io/pretty-json/pretty-json-min.js"></script>
+    <style>
+        .loader {
+            border: 3px solid #e3d3d3;
+            border-top: 3px solid #000000;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            float: left;
+            animation: spin 2s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">NAB</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <form>
+            <div class="form-group">
+                <label for="city">City:</label>
+                <input type="text" class="form-control" id="city">
+            </div>
+            <div class="form-group">
+                <label for="command">Command:</label>
+                <input type="text" class="form-control" id="command" value="ccc">
+            </div>
+        </form>
+        <div class="loader" id="loader"></div><br><br>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Results
+            </div>
+            <div class="panel-body" id="result"></div>
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $("#loader").hide();
+
+            function callAPI() {
+                let city = $("#city").val();
+                let command = $("#command").val();
+                let data = {
+                    "command": command,
+                    "city": city
+                };
+                $("#loader").show();
+                $.post("/web", JSON.stringify(data), function (data) {
+                    $("#loader").hide();
+                    let fdata = "";
+                    try {
+                        fdata = JSON.parse(data, null, 4);
+                    } catch (e) {
+                        fdata = {
+                            "error": "something went wrong"
+                        }
+                    }
+                    var node = new PrettyJSON.view.Node({
+                        el: $("#result"),
+                        data: fdata
+                    });
+                });
+            }
+            setInterval(callAPI, 30000);
+        });
+    </script>
+</body>
+
+</html>
