@@ -19,14 +19,13 @@ def send_neat_request():
     gr = requests.get('http://localhost:8888/neat', params=get_data)
     command = gr.text
     post_data = {"account": get_data, "return": "OKAY"}
-    if i % 2 == 0:
-        post_data["return"] = {
-            "catapult": "abc",
-            "carriage": "A2222S",
-            "batteringRam": 123,
-            "id": i,
-            "command": command
-        }
+    post_data["return"] = {
+        "catapult": "abc",
+        "carriage": "A2222S",
+        "batteringRam": 123,
+        "id": i,
+        "command": command
+    }
     time.sleep(2)
     pr = requests.post(
         'http://localhost:8888/neat', data=json.dumps(post_data))

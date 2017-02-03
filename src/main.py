@@ -7,7 +7,6 @@ web_reply = {}
 
 
 class WebHandler(tornado.web.RequestHandler):
-
     def get(self):
         self.render("index.html", title="NAB")
 
@@ -19,7 +18,6 @@ class WebHandler(tornado.web.RequestHandler):
 
 
 class NeatHandler(tornado.web.RequestHandler):
-
     def get(self):
         server = str(self.get_query_argument("server"))
         player = str(self.get_query_argument("player"))
@@ -27,13 +25,14 @@ class NeatHandler(tornado.web.RequestHandler):
         city = str(self.get_query_argument("city"))
         print("NEAT [GET] -->  Player : " + player + " Server : " + server +
               " Time : " + time)
-        n_resp = "OKAY"
+        n_resp = 'echo "OKAY"'
         if command:
             n_resp = command
         self.write(n_resp)
 
     def post(self):
         global web_reply
+        # data = tornado.escape.json_decode(self.request.body)
         account = json.loads(self.get_body_argument("account"))
         returnd = self.get_body_argument("return")
         data = {"account": account, "return": returnd}

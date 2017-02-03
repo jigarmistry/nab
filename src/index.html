@@ -50,7 +50,11 @@
             </div>
             <div class="form-group">
                 <label for="command">Command</label>
-                <input type="text" class="form-control" id="command" value="OKAY">
+                <input type="text" class="form-control" id="command">
+                <input type="hidden" class="form-control" id="commandvalue" value="">
+            </div>
+            <div class="form-group">
+                <button type="button" class="btn btn-default btn-md" id="btnSubmit">Submit</button>
             </div>
         </form>
         <div class="loader" id="loader"></div><br><br>
@@ -63,20 +67,25 @@
         $(function () {
             var count = 0;
             $("#count").html(count);
+            $("#btnSubmit").click(function () {
+                var command = $("#command").val();
+                $("#commandvalue").val(command);
+            });
 
             function callAPI() {
                 count = count + 1;
                 $("#count").html(count);
-                let city = $("#city").val();
-                let command = $("#command").val();
-                let data = {
+                var city = $("#city").val();
+                var command = $("#commandvalue").val();
+                var data = {
                     "command": command,
                     "city": city
                 };
                 $("#loader").show();
                 $.post("/web", JSON.stringify(data), function (data) {
                     $("#loader").hide();
-                    let fdata = "";
+                    $("#commandvalue").val("");
+                    var fdata = "";
                     try {
                         fdata = JSON.parse(data, null, 4);
                     } catch (e) {
